@@ -9,5 +9,16 @@ catch(Exception $e)
 
 }
 
-$bdd->exec('INSERT INTO jeux_video (ID, nom, possesseur, console, prix, nbre_joueurs_max, commentaires)
- VALUES ('Battlefield','Patrick', 'PC, 45, 50, \'2nde guerre mondiale\')');
+
+//$bdd->exec('INSERT INTO jeux_video(nom, possesseur, console, prix, nbre_joueurs_max, commentaires) 
+//VALUES (\'Flyff\', \'Patrick\', 0, 200, \'Un MMORPG au style manga\')');
+// echo 'Le jeu a bien été ajouté';
+
+
+// Requête préparée : ajout bdd 
+
+$req =$bdd->prepare('INSERT INTO jeux_video (nom, possesseur, console, prix, nbre_joueurs_max, commentaires)
+ VALUES (:nom,:possesseur,:console,:prix,:nbre_joueurs_max,:commentaires)');
+
+echo 'Le jeu a bien été ajouté';
+ 
