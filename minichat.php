@@ -29,7 +29,7 @@ catch(Exception $e)
 
 $reponse = $bdd->query('SELECT pseudo, message FROM minichat ORDER BY ID LIMIT 0,10');
 while($donnees= $reponse->fetch()) {
-    echo  '<ul>' . $donnees['pseudo'] . ': ' . $donnees['message'] . '</ul>';
+    echo  '<ul>' . htmlspecialchars($donnees['pseudo']) . ': ' . htmlspecialchars($donnees['message']) . '</ul>';
 }
 
 $reponse->closeCursor(); 
