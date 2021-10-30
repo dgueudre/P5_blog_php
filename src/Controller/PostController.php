@@ -17,29 +17,28 @@ class PostController
         require('src/View/post.list.php');
     }
 
-    public function modifyPost()
+    public function modifyPost($postId)
     {
         $postManager = new PostManager();
-        $post = $postManager->getPost($_GET['id']);
+        $post = $postManager->getPost($postId);
         require('src/View/post.modify.php');
     }
 
-    public function updatePost()
+    public function updatePost($postId, $title, $content)
     {
         $postManager = new PostManager();
-        $post = $postManager->updatePost($_GET['id']);
-        header('location: ?action=post.show&id=' . $_GET['id']);
+        $post = $postManager->updatePost($postId, $title, $content);
+        header('location: ?action=post.show&id=' . $postId);
     }
 
-    public function post()
+    public function post($postId)
     {
         $postManager = new PostManager();
         $commentManager = new CommentManager();
 
-        $post = $postManager->getPost($_GET['id']);
-        $comments = $commentManager->getComments($_GET['id']);
+        $post = $postManager->getPost($postId);
+        $comments = $commentManager->getComments($postId);
 
         require('src/View/post.show.php');
     }
-
 }

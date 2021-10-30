@@ -24,16 +24,19 @@ class PostManager extends Manager
         AS creation_date_fr FROM posts WHERE id = ?');
         $req->execute(array($postId));
         $post = $req->fetch(\PDO::FETCH_ASSOC);
+        if ($post == false) {
+            throw new \Exception('Le post n\'existe pas');
+        }
 
         return $post;
     }
 
-    public function updatePost($postId) {
+    public function updatePost($postId, $title, $content) {
         $db = $this->dbConnect();
         $req = $db->prepare('UPDATE posts
         SET title=?, content=?, creation_date = NOW()
         WHERE id = ?');
-        $req->execute([$_POST['title'], $_POST['content'],$postId]);
+        $req->execute([$title, $content,$postId]);
         $post = $req->fetch(\PDO::FETCH_ASSOC);
 
         return $post;
