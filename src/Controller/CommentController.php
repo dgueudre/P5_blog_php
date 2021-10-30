@@ -6,7 +6,7 @@ use App\Model\CommentManager;
 
 class CommentController
 {
-    public function addComment($postId, $author, $comment)
+    public function actionInsert($postId, $author, $comment)
     {
         $commentManager = new CommentManager();
 

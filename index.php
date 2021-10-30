@@ -48,19 +48,19 @@ $action = $_GET['action'] ?? 'post.list';
 try {
     if ($action == 'post.list') {
         $controller = new PostController();
-        $controller->listPosts();
+        $controller->actionList();
     } elseif ($action == 'post.show') {
         $controller = new PostController();
-        $controller->post(getPostId());
+        $controller->actionShow(getPostId());
     } elseif ($action == 'post.modify') {
         $controller = new PostController();
-        $controller->modifyPost(getPostId());
+        $controller->actionModify(getPostId());
     } elseif ($action == 'post.update') {
         $controller = new PostController();
-        $controller->updatePost(getPostId(), getPostTitle(), getPostContent());
+        $controller->actionUpdate(getPostId(), getPostTitle(), getPostContent());
     } elseif ($action == 'comment.insert') {
         $controller = new CommentController();
-        $controller->addComment(getPostId(), getCommentAuthor(), getCommentContent());
+        $controller->actionInsert(getPostId(), getCommentAuthor(), getCommentContent());
     } else {
         throw new Exception('L\'action demandée n\'existe pas');
     }

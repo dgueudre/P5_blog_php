@@ -8,7 +8,7 @@ use App\Model\PostManager;
 class PostController
 {
 
-    public function listPosts()
+    public function actionList()
 
     {
         $postManager = new PostManager();
@@ -17,21 +17,21 @@ class PostController
         require('src/View/post.list.php');
     }
 
-    public function modifyPost($postId)
+    public function actionModify($postId)
     {
         $postManager = new PostManager();
         $post = $postManager->get($postId);
         require('src/View/post.modify.php');
     }
 
-    public function updatePost($postId, $title, $content)
+    public function actionUpdate($postId, $title, $content)
     {
         $postManager = new PostManager();
         $post = $postManager->update($postId, $title, $content);
         header('location: ?action=post.show&id=' . $postId);
     }
 
-    public function post($postId)
+    public function actionShow($postId)
     {
         $postManager = new PostManager();
         $commentManager = new CommentManager();
