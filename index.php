@@ -1,37 +1,54 @@
 <?php
-require('controller/frontend.php');
+
+use App\Controller\CommentController;
+use App\Controller\PostController;
+
+require('vendor/autoload.php');
 
 try {
     if (isset($_GET['action'])) {
         if ($_GET['action'] == 'listPosts') {
-            listPosts();
-        }
-        elseif ($_GET['action'] == 'post') {
+            $controller = new PostController();
+            $controller->listPosts();
+        } elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                post();
-            }
-            else {
+            $controller= new PostController();
+            $controller->post();
+            } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        }
-        elseif ($_GET['action'] == 'addComment') {
+        } elseif ($_GET['action'] == 'modifypost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+            $controller= new PostController();
+            $controller->modifyPost();
+            } else {
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        } elseif ($_GET['action'] == 'updatepost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $controller= new PostController();
+                $controller->updatePost();
+            } else {
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        } elseif ($_GET['action'] == 'addcomment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                    addComment($_GET['id'], $_POST['author'], $_POST['comment']);
-                }
-                else {
+                    $controller= new CommentController();
+                    $controller->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
+                } else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
                 }
-            }
-            else {
+            } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
+        } else {
+            throw new Exception('L\'action demandée n\'existe pas');
         }
+    } else {
+        $controller= new PostController();
+        $controller->listPosts();
     }
-    else {
-        listPosts();
-    }
-}
-catch(Exception $e) {
+} catch (Exception $e) {
     echo 'Erreur : ' . $e->getMessage();
 }

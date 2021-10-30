@@ -1,0 +1,25 @@
+{
+    "name": "medjek/p5-blog-php",
+    "version": "1.0.0",
+    "type": "website",
+    "description": "Web Development - HTML, CSS, PHP, SQL",
+    "keywords": [
+        "php",
+        "mvc"
+    ],
+    "authors": [
+        {
+            "name": "Medjek Naime"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "7.3"
+        }
+    }
+}
