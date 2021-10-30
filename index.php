@@ -7,31 +7,31 @@ require('vendor/autoload.php');
 
 try {
     if (isset($_GET['action'])) {
-        if ($_GET['action'] == 'listPosts') {
+        if ($_GET['action'] == 'post.list') {
             $controller = new PostController();
             $controller->listPosts();
-        } elseif ($_GET['action'] == 'post') {
+        } elseif ($_GET['action'] == 'post.show') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
             $controller= new PostController();
             $controller->post();
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        } elseif ($_GET['action'] == 'modifypost') {
+        } elseif ($_GET['action'] == 'post.modify') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
             $controller= new PostController();
             $controller->modifyPost();
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        } elseif ($_GET['action'] == 'updatepost') {
+        } elseif ($_GET['action'] == 'post.update') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $controller= new PostController();
                 $controller->updatePost();
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        } elseif ($_GET['action'] == 'addcomment') {
+        } elseif ($_GET['action'] == 'comment.insert') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
                     $controller= new CommentController();

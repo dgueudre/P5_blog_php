@@ -28,7 +28,7 @@ class PostController
     {
         $postManager = new PostManager();
         $post = $postManager->updatePost($_GET['id']);
-        header('location: ?action=post&id=' . $_GET['id']);
+        header('location: ?action=post.show&id=' . $_GET['id']);
     }
 
     public function post()
