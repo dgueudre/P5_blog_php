@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\Repository;
 
-class CommentManager extends Manager
+class CommentRepository extends Repository
 {
     public function getAllByPostId($postId)
     {

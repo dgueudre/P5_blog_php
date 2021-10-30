@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-use App\Model\CommentManager;
+use App\Model\Repository\CommentRepository;
 
 class CommentController
 {
     public function actionInsert($postId, $author, $comment)
     {
-        $commentManager = new CommentManager();
+        $commentManager = new CommentRepository();
 
         $affectedLines = $commentManager->insert($postId, $author, $comment);
 

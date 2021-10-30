@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\Repository;
 
-class PostManager extends Manager
+class PostRepository extends Repository
 {
     public function getAll()
     {

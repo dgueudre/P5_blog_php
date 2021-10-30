@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\Repository;
 
-class Manager
+class Repository
 {
     protected function dbConnect()
     {
