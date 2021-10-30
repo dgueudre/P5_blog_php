@@ -12,7 +12,7 @@ class PostController
 
     {
         $postManager = new PostManager();
-        $posts = $postManager->getPosts();
+        $posts = $postManager->getAll();
 
         require('src/View/post.list.php');
     }
@@ -20,14 +20,14 @@ class PostController
     public function modifyPost($postId)
     {
         $postManager = new PostManager();
-        $post = $postManager->getPost($postId);
+        $post = $postManager->get($postId);
         require('src/View/post.modify.php');
     }
 
     public function updatePost($postId, $title, $content)
     {
         $postManager = new PostManager();
-        $post = $postManager->updatePost($postId, $title, $content);
+        $post = $postManager->update($postId, $title, $content);
         header('location: ?action=post.show&id=' . $postId);
     }
 
@@ -36,8 +36,8 @@ class PostController
         $postManager = new PostManager();
         $commentManager = new CommentManager();
 
-        $post = $postManager->getPost($postId);
-        $comments = $commentManager->getComments($postId);
+        $post = $postManager->get($postId);
+        $comments = $commentManager->getAllByPostId($postId);
 
         require('src/View/post.show.php');
     }

@@ -4,7 +4,7 @@ namespace App\Model;
 
 class PostManager extends Manager
 {
-    public function getPosts()
+    public function getAll()
     {
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') 
@@ -13,11 +13,11 @@ class PostManager extends Manager
         return $req;
     }
 
-    public function createPost() {
+    public function insert() {
         
     }
 
-    public function getPost($postId)
+    public function get($postId)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') 
@@ -31,7 +31,7 @@ class PostManager extends Manager
         return $post;
     }
 
-    public function updatePost($postId, $title, $content) {
+    public function update($postId, $title, $content) {
         $db = $this->dbConnect();
         $req = $db->prepare('UPDATE posts
         SET title=?, content=?, creation_date = NOW()
