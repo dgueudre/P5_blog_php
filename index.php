@@ -1,6 +1,7 @@
 <?php
 
 use App\Controller\CommentController;
+use App\Controller\HomeController;
 use App\Controller\PostController;
 
 require('vendor/autoload.php');
@@ -44,7 +45,7 @@ function getCommentContent()
         throw new Exception('La saisie du commentaire est obligatoire');
     }
 }
-$action = $_GET['action'] ?? 'post.list';
+$action = $_GET['action'] ?? 'home';
 try {
     if ($action == 'post.list') {
         $controller = new PostController();
@@ -61,6 +62,10 @@ try {
     } elseif ($action == 'comment.insert') {
         $controller = new CommentController();
         $controller->actionInsert(getPostId(), getCommentAuthor(), getCommentContent());
+    }    elseif ($action == 'home') {
+        $controller = new HomeController();
+        $controller->actionHome();
+
     } else {
         throw new Exception('L\'action demandée n\'existe pas');
     }

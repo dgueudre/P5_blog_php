@@ -4,7 +4,6 @@
 <h1>Mon super blog !</h1>
 <p>Derniers billets du blog :</p>
 
-
 <?php foreach ($posts as $post) : ?>
     <div class="news">
         <h3>
