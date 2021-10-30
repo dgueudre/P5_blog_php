@@ -2,42 +2,45 @@
 
 namespace App\Model\Repository;
 
+use App\Model\Entity\Post;
+
 class PostRepository extends Repository
 {
     public function getAll()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') 
-        AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 5');
+        $query = $db->query('SELECT id, title, content, creation_date
+        FROM posts ORDER BY creation_date DESC LIMIT 0, 5');
 
-        return $req;
+        $posts = $query->fetchAll(\PDO::FETCH_CLASS, Post::class);
+        return $posts;
     }
 
-    public function insert() {
-        
+    public function insert()
+    {
     }
 
     public function get($postId)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') 
-        AS creation_date_fr FROM posts WHERE id = ?');
-        $req->execute(array($postId));
-        $post = $req->fetch(\PDO::FETCH_ASSOC);
-        if ($post == false) {
+        $query = $db->prepare('SELECT id, title, content, creation_date
+        FROM posts WHERE id = ?');
+        $query->execute(array($postId));
+        $post = $query->fetchAll(\PDO::FETCH_CLASS, Post::class);
+        if (!isset($post[0])) {
             throw new \Exception('Le post n\'existe pas');
         }
-
-        return $post;
+        return $post[0];
     }
 
-    public function update($postId, $title, $content) {
+    public function update($postId, $title, $content)
+    {
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE posts
+        $query = $db->prepare('UPDATE posts
         SET title=?, content=?, creation_date = NOW()
         WHERE id = ?');
-        $req->execute([$title, $content,$postId]);
-        $post = $req->fetch(\PDO::FETCH_ASSOC);
+        $query->execute([$title, $content, $postId]);
+        $post = $query->fetch(\PDO::FETCH_ASSOC);
 
         return $post;
     }

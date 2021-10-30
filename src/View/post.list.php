@@ -5,27 +5,21 @@
 <p>Derniers billets du blog :</p>
 
 
-<?php
-while ($data = $posts->fetch())
-{
-?>
+<?php foreach ($posts as $post) : ?>
     <div class="news">
         <h3>
-            <?= htmlspecialchars($data['title']) ?>
-            <em>le <?= $data['creation_date_fr'] ?></em>
+            <?= htmlspecialchars($post->title) ?>
+            <em>le <?= $post->getPostDateFr() ?></em>
         </h3>
         
         <p>
-            <?= nl2br(htmlspecialchars($data['content'])) ?>
+            <?= nl2br(htmlspecialchars($post->content)) ?>
             <br />
-            <em><a href="index.php?action=post.show&amp;id=<?= $data['id'] ?>">Commentaires</a></em>
-            <em><a href="index.php?action=post.modify&amp;id=<?= $data['id'] ?>">Modifier</a></em>
+            <em><a href="index.php?action=post.show&amp;id=<?= $post->id ?>">Commentaires</a></em>
+            <em><a href="index.php?action=post.modify&amp;id=<?= $post->id ?>">Modifier</a></em>
         </p>
     </div>
-<?php
-}
-$posts->closeCursor();
-?>
+<?php endforeach ?>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>

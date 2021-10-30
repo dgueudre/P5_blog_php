@@ -2,13 +2,18 @@
 
 namespace App\Model\Repository;
 
+use App\Model\Entity\Comment;
+
 class CommentRepository extends Repository
 {
     public function getAllByPostId($postId)
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
-        $comments->execute(array($postId));
+        $query = $db->prepare('SELECT id, post_id, author, comment, comment_date 
+        /* DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr */
+        FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
+        $query->execute(array($postId));
+        $comments=$query->fetchAll(\PDO::FETCH_CLASS, Comment::class);
 
         return $comments;
     }

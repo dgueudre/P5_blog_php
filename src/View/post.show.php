@@ -1,4 +1,4 @@
-<?php $title = htmlspecialchars($post['title']); ?>
+<?php $title = htmlspecialchars($post->title); ?>
 
 <?php ob_start(); ?>
 <h1>Mon super blog !</h1>
@@ -7,17 +7,17 @@
 <div class="news">
     <h3>
         <?= $title ?>
-        <em>le <?= $post['creation_date_fr'] ?></em>
+        <em>le <?= $post->getPostDateFr() ?></em>
     </h3>
     
     <p>
-        <?= nl2br(htmlspecialchars($post['content'])) ?>
+        <?= nl2br(htmlspecialchars($post->content)) ?>
     </p>
 </div>
 
 <h2>Commentaires</h2>
 
-<form action="index.php?action=comment.insert&amp;id=<?= $post['id'] ?>" method="post">
+<form action="index.php?action=comment.insert&amp;id=<?= $post->id ?>" method="post">
     <div>
         <label for="author">Auteur</label><br />
         <input type="text" id="author" name="author" />
@@ -31,15 +31,10 @@
     </div>
 </form>
 
-<?php
-while ($comment = $comments->fetch())
-{
-?>
-    <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
-    <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-<?php
-}
-?>
+<?php foreach($comments as $comment): ?>
+    <p><strong><?= htmlspecialchars($comment->author) ?></strong> le <?= $comment->getCommentDateFr() ?></p>
+    <p><?= nl2br(htmlspecialchars($comment->comment)) ?></p>
+<?php endforeach ?>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>
