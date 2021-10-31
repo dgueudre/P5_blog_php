@@ -68,6 +68,12 @@ try {
     } elseif ($action == 'post.delete') {
         $controller = new PostController();
         $controller->actionDelete(getPostId());
+    } elseif ($action == 'post.create') {
+        $controller = new PostController();
+        $controller->actionCreate();
+    } elseif ($action == 'post.insert') {
+        $controller = new PostController();
+        $controller->actionInsert(getPostTitle(), getPostContent());
     } else {
         throw new Exception('L\'action demandée n\'existe pas');
     }

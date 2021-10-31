@@ -49,4 +49,18 @@ class PostController
         
         require('src/View/post.delete.php');
     }
+
+    public function actionCreate()
+    {
+        $postManager = new PostRepository();
+        require('src/View/post.create.php');
+    }
+
+    public function actionInsert($title, $content)
+    {
+        $postManager = new PostRepository();
+
+        $post = $postManager->insert($title, $content);
+        require('src/View/post.insert.php');
+    }
 }

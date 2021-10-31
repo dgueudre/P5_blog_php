@@ -17,7 +17,7 @@
 
 <h2>Commentaires</h2>
 
-<form action="index.php?action=comment.insert&amp;id=<?= $post->id ?>" method="post">
+<form action="index.php?action=comment.insert" method="post">
     <div>
         <label for="author">Auteur</label><br />
         <input type="text" id="author" name="author" />

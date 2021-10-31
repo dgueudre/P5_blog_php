@@ -16,8 +16,13 @@ class PostRepository extends Repository
         return $posts;
     }
 
-    public function insert()
+    public function insert($title,$content)
     {
+        $db = $this->dbConnect();
+        $query = $db->prepare('INSERT INTO posts(title, content, creation_date) VALUES(?, ?, NOW() )');
+        $query->execute([$title,$content]);
+        $post = $query->fetch(\PDO::FETCH_ASSOC);
+        return $post;
     }
 
     public function get($postId)

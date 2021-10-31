@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 <h1>Mon super blog !</h1>
 <p>Derniers billets du blog :</p>
-
+<em><a href="index.php?action=post.create">Ajouter</a></em>
 <?php foreach ($posts as $post) : ?>
     <div class="news">
         <h3>
