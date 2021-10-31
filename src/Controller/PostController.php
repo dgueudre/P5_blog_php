@@ -41,4 +41,12 @@ class PostController
 
         require('src/View/post.show.php');
     }
+
+    public function actionDelete($postId)
+    {
+        $postManager = new PostRepository();
+        $post = $postManager->delete($postId);
+        
+        require('src/View/post.delete.php');
+    }
 }
