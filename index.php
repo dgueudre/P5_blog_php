@@ -62,10 +62,12 @@ try {
     } elseif ($action == 'comment.insert') {
         $controller = new CommentController();
         $controller->actionInsert(getPostId(), getCommentAuthor(), getCommentContent());
-    }    elseif ($action == 'home') {
+    } elseif ($action == 'home') {
         $controller = new HomeController();
         $controller->actionHome();
-
+    } elseif ($action == 'post.delete') {
+        $controller = new PostController();
+        $controller->actionDelete(getPostId());
     } else {
         throw new Exception('L\'action demandée n\'existe pas');
     }

@@ -16,6 +16,8 @@
             <br />
             <em><a href="index.php?action=post.show&amp;id=<?= $post->id ?>">Commentaires</a></em>
             <em><a href="index.php?action=post.modify&amp;id=<?= $post->id ?>">Modifier</a></em>
+            <em><a href="index.php?action=post.delete&amp;id=<?= $post->id ?>">Supprimer</a></em>
+
         </p>
     </div>
 <?php endforeach ?>

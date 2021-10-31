@@ -44,4 +44,14 @@ class PostRepository extends Repository
 
         return $post;
     }
+
+    public function delete($postId)
+    {
+        $db = $this->dbConnect();
+        $query = $db->prepare('DELETE FROM posts WHERE id = ?');
+        $query->execute([$postId]);
+        $post = $query->fetch(\PDO::FETCH_ASSOC);
+        return $post;
+
+    }
 }
