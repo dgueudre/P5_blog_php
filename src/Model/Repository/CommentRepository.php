@@ -25,4 +25,30 @@ class CommentRepository extends Repository
         $affectedLines = $comments->execute(array($postId, $author, $comment));
         return $affectedLines;
     }
+
+
+    public function get($postId)
+    {
+        $db = $this->dbConnect();
+        $query = $db->prepare('SELECT id, author, comment, creation_date
+        FROM comments WHERE id = ?');
+        $query->execute(array($postId));
+        $comment = $query->fetchAll(\PDO::FETCH_CLASS, Comment::class);
+        if (!isset($comment[0])) {
+        throw new \Exception('Le commentaire n\'existe pas');
+        }
+       return $comment[0];
+    }
+
+    public function update($author, $comment, $postId)
+    {
+        $db = $this->dbConnect();
+        $query = $db->prepare('UPDATE comments
+        SET author=?, comment=?, creation_date = NOW()
+        WHERE id = ?');
+        $query->execute([$author, $comment, $postId]);
+        $comment = $query->fetch(\PDO::FETCH_ASSOC);
+
+        return $comment;
+    }
 }
