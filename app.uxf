@@ -1,0 +1,28 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>850</x><y>430</y><w>250</w><h>130</h></coordinates><panel_attributes>CommentRepository
+--
+- $db Database
+--
+- insert($title, $content, $userid)
+- update($postId, $title, $content, $userid)
+- delete($postId)
+- getOneById($postId)
+- getAll()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>850</x><y>260</y><w>250</w><h>130</h></coordinates><panel_attributes>PostRepository
+--
+- $db Database
+--
+- insert($title, $content, $userid)
+- update($postId, $title, $content, $userid)
+- delete($postId)
+- getOneById($postId)
+- getAll()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>850</x><y>60</y><w>250</w><h>130</h></coordinates><panel_attributes>UserRepository
+--
+- $db Database
+--
+- insert($title, $content, $userid)
+- update($postId, $title, $content, $userid)
+- delete($postId)
+- getOneById($postId)
+- getAll()
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>
