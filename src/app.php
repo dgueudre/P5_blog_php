@@ -51,7 +51,6 @@ function getCommentContent()
     } else {
         throw new Exception('La saisie du commentaire est obligatoire');
     }
-
 }
 $action = $_GET['action'] ?? 'home';
 try {
@@ -91,8 +90,7 @@ try {
     } elseif ($action =='comment.delete') {
         $controller = new CommentController();
         $controller->actionDelete(getCommentId());
-
-    }else {
+    } else {
         throw new Exception('L\'action demandée n\'existe pas');
     }
 } catch (Exception $e) {

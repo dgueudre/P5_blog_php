@@ -9,7 +9,7 @@
         <?= $title ?>
         <em>le <?= $post->getPostDateFr() ?></em>
     </h3>
-    
+
     <p>
         <?= nl2br(htmlspecialchars($post->content)) ?>
     </p>
@@ -31,12 +31,16 @@
     </div>
 </form>
 
-<?php foreach($comments as $comment): ?>
-    <p><strong><?= htmlspecialchars($comment->author) ?></strong> le <?= $comment->getCommentDateFr() ?></p>
-    <p><?= nl2br(htmlspecialchars($comment->comment)) ?></p>
-    <a href="index.php?action=comment.modify&amp;id=<?= $comment->id ?>">Modifier</a>
-    <a href="index.php?action=comment.delete&amp;id=<?= $comment->id ?>">Supprimer</a>
+<?php foreach ($comments as $comment): ?>
+<p>
+    <strong><?= htmlspecialchars($comment->author) ?></strong> le <?= $comment->getCommentDateFr() ?>
+</p>
+<p>
+    <?= nl2br(htmlspecialchars($comment->comment)) ?>
+</p>
+<a href="index.php?action=comment.modify&amp;id=<?= $comment->id ?>">Modifier</a>
+<a href="index.php?action=comment.delete&amp;id=<?= $comment->id ?>">Supprimer</a>
 <?php endforeach ?>
 <?php $content = ob_get_clean(); ?>
 
-<?php require('template.php'); ?>
+<?php require('template.php');
